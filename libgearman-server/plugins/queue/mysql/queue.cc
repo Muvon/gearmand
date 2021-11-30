@@ -222,6 +222,7 @@ gearmand_error_t _initialize(gearman_server_st& server, gearmand::plugins::queue
   queue->con= mysql_init(queue->con);
 
   mysql_options(queue->con, MYSQL_READ_DEFAULT_GROUP, "gearmand");
+  mysql_options(queue->con, MYSQL_OPT_RECONNECT, &my_true);
 
   if (!mysql_real_connect(queue->con,
                           queue->mysql_host.c_str(),
@@ -234,8 +235,6 @@ gearmand_error_t _initialize(gearman_server_st& server, gearmand::plugins::queue
 
     return GEARMAND_QUEUE_ERROR;
   }
-
-  mysql_options(queue->con, MYSQL_OPT_RECONNECT, &my_true);
 
   if (!(result= mysql_list_tables(queue->con, queue->mysql_table.c_str())))
   {
