@@ -255,7 +255,7 @@ gearmand_error_t _initialize(gearman_server_st& server, gearmand::plugins::queue
                                       "data LONGBLOB,"
                                       "when_to_run INT,"
                                       "unique key (unique_key, function_name)"
-                                      ")",
+                                      ") ENGINE=Aria",
                                       queue->mysql_table.c_str(), GEARMAN_UNIQUE_SIZE);
 
     gearmand_log_info(GEARMAN_DEFAULT_LOG_PARAM,"MySQL module: creating table %s", queue->mysql_table.c_str());
