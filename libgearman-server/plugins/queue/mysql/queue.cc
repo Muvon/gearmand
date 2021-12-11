@@ -221,6 +221,7 @@ gearmand_error_t _initialize(gearman_server_st& server, gearmand::plugins::queue
 
   queue->con= mysql_init(queue->con);
 
+  mysql_options(queue->con, MYSQL_INIT_COMMAND, (void *)"SET SESSION wait_timeout = 86400");
   mysql_options(queue->con, MYSQL_READ_DEFAULT_GROUP, "gearmand");
   mysql_options(queue->con, MYSQL_OPT_RECONNECT, &my_true);
 
